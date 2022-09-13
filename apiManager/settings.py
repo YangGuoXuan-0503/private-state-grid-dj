@@ -125,7 +125,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-PROJECT_ROOT = os.path.join(os.path.dirname(__file__), os.pardir)
+PROJECT_ROOT = os.path.dirname(__file__).split('/apiManager')[0]
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -134,6 +134,9 @@ STATICFILES_DIRS = (
     '%s/static' % PROJECT_ROOT,
     '%s/frontend/build' % PROJECT_ROOT,
 )
+print('********')
+print(PROJECT_ROOT)
+print(os.path.join(PROJECT_ROOT, 'frontend/webpack-stats.dev.json'))
 
 WEBPACK_LOADER = {
     'DEFAULT': {
