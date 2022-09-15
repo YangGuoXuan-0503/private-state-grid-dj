@@ -1,5 +1,6 @@
 .mode-evaluation-container {
   padding: 20px;
+  overflow-y: scroll;
 }
 
 .mode-evaluation-container .mode-evaluation-item {
