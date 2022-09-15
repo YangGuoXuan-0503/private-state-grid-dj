@@ -24,9 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lp(lmx)5&i_3-9=5)e_%h2zcak9h%=!&y1g^uqs&q4$8l33fdc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = False
 
 
 # Application definition
@@ -146,3 +144,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = '%s/media/' % PROJECT_ROOT
 
 WEB_SERVICE_URL = ''
+
+ALLOWED_HOSTS = ['*']
