@@ -1,2 +1,8 @@
 Django
 django-webpack-loader==0.7.0
+xlrd3
+django-formtools==2.3
+django-simple-captcha
+djangorestframework
+gurobipy
+pandas

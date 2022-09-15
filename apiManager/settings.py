@@ -134,9 +134,6 @@ STATICFILES_DIRS = (
     '%s/static' % PROJECT_ROOT,
     '%s/frontend/build' % PROJECT_ROOT,
 )
-print('********')
-print(PROJECT_ROOT)
-print(os.path.join(PROJECT_ROOT, 'frontend/webpack-stats.dev.json'))
 
 WEBPACK_LOADER = {
     'DEFAULT': {
@@ -144,3 +141,8 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(PROJECT_ROOT, 'frontend/webpack-stats.dev.json'),
     }
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '%s/media/' % PROJECT_ROOT
+
+WEB_SERVICE_URL = ''

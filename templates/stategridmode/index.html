@@ -8,12 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mode Evaluation</title>
     {% block extra_style %}
+    <link rel="stylesheet" type="text/css" href="{{ media_url }}css/common.css" />
     {% render_bundle 'modeEvaluation' 'css' %}
     {% endblock %}
 </head>
 <body>
-    <div id="wrapper" class="mode-evaluation-container"></div>
+    <div id="wrapper" class="wrapper"></div>
     {% block extra_script %}
+    <script type="text/javascript">
+        window.app = {
+            server: '{{ service_url }}',
+        };
+    </script>
     {% render_bundle 'modeEvaluation' 'js' %}
     {% render_bundle 'runtime' 'js' %}
     {% endblock %}

@@ -16,9 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path
-from django.urls import re_path as url 
+from django.urls import re_path as url
+from apiManager.settings import MEDIA_URL, MEDIA_ROOT
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^', include('stategridmode.urls')),
 ]
+if MEDIA_URL:
+    from django.views.static import serve as static_view
+    media_url = MEDIA_URL.strip('/')
+    urlpatterns += [
+        url(r'^%s/(?P<path>.*)$' % (media_url), static_view,
+            {'document_root': MEDIA_ROOT}),
+    ]

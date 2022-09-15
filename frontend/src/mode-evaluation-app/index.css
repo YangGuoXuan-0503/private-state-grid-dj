@@ -1,3 +1,20 @@
-.mode-evaluation {
-  background-color: red;
+.mode-evaluation-container {
+  padding: 20px;
+}
+
+.mode-evaluation-container .mode-evaluation-item {
+  flex-direction: column;
+}
+
+.mode-evaluation-container .mode-evaluation-item .mode-evaluation-item {
+  width: calc((100% - 16px) / 2);
+}
+
+.mode-evaluation-container .mode-evaluation-item .mode-evaluation-item:first-child {
+  margin-right: 16px;
+}
+
+.mode-evaluation-container .project-importance-select__control {
+  height: 38px;
+  border-color: rgba(0, 40, 100, .12);
 }
