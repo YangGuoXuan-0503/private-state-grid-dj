@@ -122,6 +122,7 @@ class ModeEvaluationApp extends Component {
   render() {
     const { projectName, projectCapitalInvestment, projectImportance, projectEffectivenessEvaluationResults,
       plannedDuration, actualDuration, isDetecting, isShowDetectResultDialog } = this.state;
+    const cc = parseFloat(plannedDuration || 0) - 0 < 0.00000001 ? 0 : (parseFloat(plannedDuration) - parseFloat(actualDuration || 0)) / parseFloat(plannedDuration);
     return (
       <>
         <div className="mode-evaluation-container w-100 h-100">
@@ -130,7 +131,7 @@ class ModeEvaluationApp extends Component {
             <Input
               type="text"
               value={projectName}
-              placeholder="请输入项目名称, 例如: 1900xxx"
+              placeholder="请输入项目名称, 例如: xx项目"
               onChange={this.onProjectNameChange}
             />
           </FormGroup>
@@ -154,7 +155,7 @@ class ModeEvaluationApp extends Component {
             />
           </FormGroup>
           <FormGroup key="project-completion-degree" className="mb-4 w-100 mode-evaluation-item d-flex">
-            <Label className="mb-1">{`所评价项目的规定时间完成程度(${parseFloat(plannedDuration) - 0 < 0.00000001 ? 0 : (parseFloat(plannedDuration) - parseFloat(actualDuration)) / parseFloat(plannedDuration) * 100}%)`}</Label>
+            <Label className="mb-1">{`所评价项目的规定时间完成程度(${cc * 100}%)`}</Label>
             <div className="d-flex w-100">
               <FormGroup key="planned-duration" className="mode-evaluation-item d-flex">
                 <Label className="mb-2">{'规定工期'}</Label>
@@ -181,7 +182,7 @@ class ModeEvaluationApp extends Component {
             <Input
               type="number"
               value={projectEffectivenessEvaluationResults}
-              placeholder="项目成效评价结果"
+              placeholder="项目成效评价结果, 单位: 分, 例如: 80"
               onChange={this.onProjectEffectivenessEvaluationResultsChange}
             />
           </FormGroup>
