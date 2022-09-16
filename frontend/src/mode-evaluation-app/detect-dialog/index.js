@@ -22,37 +22,37 @@ class DetectDialog extends Component {
   getProjectProposal = (record, columnsCount) => {
     if (record['1'] === 1 && record['2'] === 1 && record['3'] === 0 && record['5'] === '规模报酬固定') {
       return {
-        [columnsCount + '']: '可推广',
-        [(columnsCount + 1) + '']: '续建项目可立项',
+        [columnsCount + '']: '优秀',
+        [(columnsCount + 1) + '']: '续建项目建议立项',
       };
     }
     if (record['1'] === 1 && record['2'] === 1 && record['3'] > 0 && record['5'] === '规模报酬固定') {
       return {
-        [columnsCount + '']: '可借鉴',
-        [(columnsCount + 1) + '']: '续建项目可立项',
+        [columnsCount + '']: '良好',
+        [(columnsCount + 1) + '']: '续建项目可以立项',
       };
     }
     if (record['1'] === 1 && record['2'] < 1 && record['3'] > 0 && record['5'] === '规模报酬递减') {
       return {
-        [columnsCount + '']: '可改进',
-        [(columnsCount + 1) + '']: '续建项目可立项',
+        [columnsCount + '']: '一般',
+        [(columnsCount + 1) + '']: '续建项目暂缓立项',
       };
     }
     if ((record['1'] >= 0.6 && record['1'] < 1) && (record['2'] >= 0.6 && record['2'] < 1) && record['3'] > 0 && record['5'] === '规模报酬递减') {
       return {
-        [columnsCount + '']: '可规避',
+        [columnsCount + '']: '较差',
         [(columnsCount + 1) + '']: '续建项目暂缓立项',
       };
     }
     if (record['1'] <= 0.5 && record['2'] <= 0.5 && record['3'] > 0 && record['5'] === '规模报酬递减') {
       return {
-        [columnsCount + '']: '可追责',
+        [columnsCount + '']: '差',
         [(columnsCount + 1) + '']: '续建项目不予立项',
       };
     }
     return {
-      [columnsCount + '']: '实际考察',
-      [(columnsCount + 1) + '']: '续建项目暂缓立项',
+      [columnsCount + '']: 'N/A',
+      [(columnsCount + 1) + '']: 'N/A',
     };
   }
 

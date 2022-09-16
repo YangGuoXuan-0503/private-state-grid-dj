@@ -24,9 +24,9 @@ class ModeEvaluationApp extends Component {
       projectName: '', // 项目名称
       projectCapitalInvestment: '', // 项目资金投入
       projectImportance: this.projectImportanceOptions[0], // 项目重要程度
-      projectEffectivenessEvaluationResults: 0, // 项目成效评价结果
-      plannedDuration: 0, // 规定工期
-      actualDuration: 0, // 实际工期
+      projectEffectivenessEvaluationResults: '', // 项目成效评价结果
+      plannedDuration: '', // 规定工期
+      actualDuration: '', // 实际工期
       errorMessage: '',
     };
   }
@@ -72,7 +72,7 @@ class ModeEvaluationApp extends Component {
     this.setState({ isDetecting: true });
     const { projectName, projectCapitalInvestment, projectImportance, projectEffectivenessEvaluationResults, plannedDuration,
       actualDuration } = this.state;
-    const projectCompletionDegree = parseFloat(plannedDuration) - 0 < 0.000001 ? 0 : (parseFloat(plannedDuration) - parseFloat(actualDuration)) / parseFloat(plannedDuration); // 所评价项目的规定时间完成程度
+    const projectCompletionDegree = parseFloat(plannedDuration) - 0 < 0.00000001 ? 0 : (parseFloat(plannedDuration) - parseFloat(actualDuration)) / parseFloat(plannedDuration); // 所评价项目的规定时间完成程度
     modeAppraisalAPI.oneRecordAppraisal({
       project_name: projectName,
       project_capital_investment: parseFloat(projectCapitalInvestment),
@@ -84,6 +84,7 @@ class ModeEvaluationApp extends Component {
       this.setState({ isDetecting: false, isShowDetectResultDialog: true });
     }).catch(error => {
       this.detectResult = null;
+      alert('参数错误');
       this.setState({ isDetecting: false });
     });
   }
@@ -109,6 +110,7 @@ class ModeEvaluationApp extends Component {
       this.setState({ isDetecting: false, isShowDetectResultDialog: true });
     }).catch(error => {
       this.detectResult = null;
+      alert('参数错误');
       this.setState({ isDetecting: false });
     });
   }
@@ -152,14 +154,14 @@ class ModeEvaluationApp extends Component {
             />
           </FormGroup>
           <FormGroup key="project-completion-degree" className="mb-4 w-100 mode-evaluation-item d-flex">
-            <Label className="mb-1">{'所评价项目的规定时间完成程度'}</Label>
+            <Label className="mb-1">{'所评价项目的规定时间完成程度(根据填写规定工期和实际工期的值而变化)'}</Label>
             <div className="d-flex w-100">
               <FormGroup key="planned-duration" className="mode-evaluation-item d-flex">
                 <Label className="mb-2">{'规定工期'}</Label>
                 <Input
                   type="number"
                   value={plannedDuration}
-                  placeholder="规定工期"
+                  placeholder="规定工期(天)"
                   onChange={this.onPlannedDurationChange}
                 />
               </FormGroup>
@@ -168,7 +170,7 @@ class ModeEvaluationApp extends Component {
                 <Input
                   type="number"
                   value={actualDuration}
-                  placeholder="实际工期"
+                  placeholder="实际工期(天)"
                   onChange={this.onActualDurationChange}
                 />
               </FormGroup>
