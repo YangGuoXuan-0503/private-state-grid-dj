@@ -47,11 +47,11 @@ class oneRecordAppraisal(APIView):
         data = pd.DataFrame({
             project_name: [project_capital_investment, project_importance, project_effectiveness_evaluation_results, project_completion_degree],
         },
-        index=['项目资金投入', '项目重要程度', '项目成效评价结果', '所评价项目的规定时间完成程度']
+        index=['项目资金投入', '项目重要程度', '所评价项目的规定时间完成程度', '项目成效评价结果']
         ).T
 
-        X = data[['项目资金投入', '项目重要程度', '项目成效评价结果']]
-        Y = data[['所评价项目的规定时间完成程度']]
+        X = data[['项目资金投入', '项目重要程度', '所评价项目的规定时间完成程度']]
+        Y = data[['项目成效评价结果']]
 
         dea = DEA(DMUs_Name=data.index, X=X, Y=Y)
         results = dea.analysis()
@@ -60,7 +60,7 @@ class oneRecordAppraisal(APIView):
         columns = [{
                 'name': '项目名称',
                 'group': '项目名称',
-                'key': 0
+                'key': '0'
             }]
         records = []
         
@@ -69,13 +69,16 @@ class oneRecordAppraisal(APIView):
             columns.append({
                 'name': i[1],
                 'group': i[0],
-                'key': columns_length
+                'key': str(columns_length)
             })
 
         for i in results_records:
+            record = {}
+            record['0'] = project_name
             results_record = list(i)
-            results_record.insert(0, project_name)
-            records.append(results_record)
+            for j in range(len(results_record)):
+                record[str(j + 1)] = results_record[j]
+            records.append(record)
 
         return Response({
             'columns': columns,
@@ -126,7 +129,7 @@ class fileAppraisal(APIView):
         columns = [{
                 'name': project_name,
                 'group': project_name,
-                'key': 0
+                'key': '0'
             }]
         records = []
         
@@ -135,16 +138,20 @@ class fileAppraisal(APIView):
             columns.append({
                 'name': i[1],
                 'group': i[0],
-                'key': columns_length
+                'key': str(columns_length)
             })
 
         for i in results_records:
             results_record = list(i)
-            records.append(results_record)
+            record = {}
+            for j in range(len(results_record)):
+                record[str(j + 1)] = results_record[j]
+            records.append(record)
         
         for i in range(1, sheet.nrows):
             row = sheet.row_values(i)
-            records[i - 1].insert(0, row[0])
+            record = records[i-1]
+            record['0'] = row[0]
 
         return Response({
             'columns': columns,

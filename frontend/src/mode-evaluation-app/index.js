@@ -151,15 +151,6 @@ class ModeEvaluationApp extends Component {
               onChange={this.onProjectImportanceChange}
             />
           </FormGroup>
-          <FormGroup key="project-effectiveness-evaluation-results" className="mb-4 w-100 mode-evaluation-item d-flex">
-            <Label className="mb-2">{'项目成效评价结果'}</Label>
-            <Input
-              type="number"
-              value={projectEffectivenessEvaluationResults}
-              placeholder="项目成效评价结果"
-              onChange={this.onProjectEffectivenessEvaluationResultsChange}
-            />
-          </FormGroup>
           <FormGroup key="project-completion-degree" className="mb-4 w-100 mode-evaluation-item d-flex">
             <Label className="mb-1">{'所评价项目的规定时间完成程度'}</Label>
             <div className="d-flex w-100">
@@ -182,6 +173,15 @@ class ModeEvaluationApp extends Component {
                 />
               </FormGroup>
             </div>
+          </FormGroup>
+          <FormGroup key="project-effectiveness-evaluation-results" className="mb-4 w-100 mode-evaluation-item d-flex">
+            <Label className="mb-2">{'项目成效评价结果'}</Label>
+            <Input
+              type="number"
+              value={projectEffectivenessEvaluationResults}
+              placeholder="项目成效评价结果"
+              onChange={this.onProjectEffectivenessEvaluationResultsChange}
+            />
           </FormGroup>
           <input
             className="d-none"
