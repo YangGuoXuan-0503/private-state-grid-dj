@@ -93,7 +93,7 @@ class DetectDialog extends Component {
       return {
         ...record,
         ...projectProposal,
-      }
+      };
     });
 
     return (
