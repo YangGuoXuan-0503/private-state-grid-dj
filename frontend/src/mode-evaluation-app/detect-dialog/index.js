@@ -44,15 +44,9 @@ class DetectDialog extends Component {
         [(columnsCount + 1) + '']: '续建项目暂缓立项',
       };
     }
-    if (record['1'] <= 0.5 && record['2'] <= 0.5 && record['3'] > 0 && record['5'] === '规模报酬递减') {
-      return {
-        [columnsCount + '']: '差',
-        [(columnsCount + 1) + '']: '续建项目不予立项',
-      };
-    }
     return {
-      [columnsCount + '']: 'N/A',
-      [(columnsCount + 1) + '']: 'N/A',
+      [columnsCount + '']: '差',
+      [(columnsCount + 1) + '']: '续建项目不予立项',
     };
   }
 
