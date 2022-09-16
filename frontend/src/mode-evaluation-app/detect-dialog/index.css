@@ -1,10 +1,10 @@
 .detect-result-dialog {
   max-width: calc(100% - 60px);
-  height: 100%;
+  height: calc(100% - 56px);
 }
 
 .detect-result-dialog .modal-content {
-  height: calc(100% - 56px);
+  height: 100%;
 }
 
 .detect-result-dialog .detect-result-body {
@@ -52,4 +52,8 @@
   align-items: center;
   justify-content: center;
   padding: 4px;
+}
+
+.detect-result-dialog .detect-result-item.details:hover {
+  cursor: pointer;
 }

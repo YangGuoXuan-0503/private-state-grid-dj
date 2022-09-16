@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
+import RecordDetailsDialog from '../record-details-dialog';
+
 
 import './index.css';
 
@@ -95,56 +97,65 @@ class DetectDialog extends Component {
     });
 
     return (
-      <Modal
-        isOpen={true}
-        toggle={this.toggle}
-        className="detect-result-dialog"
-        size='lg'
-        zIndex={100}
-      >
-        <ModalHeader toggle={this.toggle}>{'评价结果'}</ModalHeader>
-        <ModalBody className="detect-result-body">
-          <div className="detect-result-container">
-            <table className="detect-result-table">
-              <thead>
-                <tr className="detect-result-tr">
-                  {displayColumns.map((column, index) => {
+      <>
+        <Modal
+          isOpen={true}
+          toggle={this.toggle}
+          className="detect-result-dialog"
+          size='lg'
+          zIndex={1050}
+        >
+          <ModalHeader toggle={this.toggle}>{'评价结果'}</ModalHeader>
+          <ModalBody className="detect-result-body">
+            <div className="detect-result-container">
+              <table className="detect-result-table">
+                <thead>
+                  <tr className="detect-result-tr">
+                    {displayColumns.map((column, index) => {
+                      return (
+                        <th key={index} className="detect-result-td">
+                          <div className="detect-result-item w-100">{column.name}</div>
+                        </th>
+                      );
+                    })}
+                    <th key={'-1'} className="detect-result-td">
+                      <div className="detect-result-item w-100">{'详情'}</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {validRecords.map((record, index) => {
                     return (
-                      <th key={index} className="detect-result-td">
-                        <div className="detect-result-item w-100">{column.name}</div>
-                      </th>
+                      <tr key={index} className="detect-result-tr">
+                        {displayColumns.map((column, valueIndex) => {
+                          return (
+                            <td key={`${index}-${valueIndex}`} className="detect-result-td">
+                              <div className="detect-result-item w-100">{record[column.key]}</div>
+                            </td>
+                          );
+                        })}
+                        <td key={`${index}--1`} className="detect-result-td">
+                          <div
+                            className="detect-result-item details w-100"
+                            onClick={(event) => this.openRecordDetails(event, record, allColumns)}
+                          >{'详情'}</div>
+                        </td>
+                      </tr>
                     );
                   })}
-                  <th key={index} className="detect-result-td">
-                    <div className="detect-result-item w-100">{'详情'}</div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {validRecords.map((record, index) => {
-                  return (
-                    <tr key={index} className="detect-result-tr">
-                      {displayColumns.map((column, valueIndex) => {
-                        return (
-                          <td key={`${index}-${valueIndex}`} className="detect-result-td">
-                            <div className="detect-result-item w-100">{record[column.key]}</div>
-                          </td>
-                        );
-                      })}
-                      <td key={`${index}-${valueIndex}`} className="detect-result-td">
-                        <div
-                          className="detect-result-item details w-100"
-                          onClick={(event) => this.openRecord(event, record, allColumns)}
-                        >{'详情'}</div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </ModalBody>
-      </Modal>
+                </tbody>
+              </table>
+            </div>
+          </ModalBody>
+        </Modal>
+        {this.state.isShowDetails && (
+          <RecordDetailsDialog
+            record={this.record}
+            columns={this.columns}
+            toggleDialog={this.closeRecordDetails}
+          />
+        )}
+      </>
     );
   }
 }

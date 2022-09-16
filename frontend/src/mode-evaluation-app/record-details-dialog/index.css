@@ -1,0 +1,32 @@
+.detect-record-dialog {
+  min-width: calc(100% - 400px);
+  height: calc(100% - 56px);
+}
+
+.detect-record-dialog .modal-content {
+  height: 100%;
+}
+
+.detect-record-dialog .detect-record-body {
+  height: calc(100% - 57px);
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.detect-record-dialog .detect-record-container {
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  overflow: scroll;
+}
+
+.detect-record-dialog .detect-record-container .record-item {
+  flex-direction: column;
+}
+
+.detect-record-dialog .detect-record-container .record-item-value {
+  min-height: 38px;
+  background: #f8f9fa;
+  border-radius: 3px;
+  padding: 3px 8px;
+}
