@@ -20,33 +20,46 @@ class DetectDialog extends Component {
   }
 
   getProjectProposal = (record, columnsCount) => {
-    if (record['1'] === 1 && record['2'] === 1 && record['3'] === 0 && record['5'] === '规模报酬固定') {
+    const s_ = record['6'] + record['7'];
+    const s__ = record['8'] + record['9'];
+    const s___ = s_ + s__;
+    if (record['1'] === 1 && record['2'] === 1 && s___ === 0 && record['5'] === '规模报酬固定') {
       return {
-        [columnsCount + '']: '优秀',
-        [(columnsCount + 1) + '']: '续建项目建议立项',
+        [columnsCount + '']: s_,
+        [(columnsCount + 1) + '']: s__,
+        [(columnsCount + 2) + '']: '优秀',
+        [(columnsCount + 3) + '']: '续建项目建议立项',
       };
     }
-    if (record['1'] === 1 && record['2'] === 1 && record['3'] > 0 && record['5'] === '规模报酬固定') {
+    if (record['1'] === 1 && record['2'] === 1 && s___ > 0 && record['5'] === '规模报酬固定') {
       return {
-        [columnsCount + '']: '良好',
-        [(columnsCount + 1) + '']: '续建项目可以立项',
+        [columnsCount + '']: s_,
+        [(columnsCount + 1) + '']: s__,
+        [(columnsCount + 2) + '']: '良好',
+        [(columnsCount + 3) + '']: '续建项目可以立项',
       };
     }
-    if (record['1'] === 1 && record['2'] < 1 && record['3'] > 0 && record['5'] === '规模报酬递减') {
+    if (record['1'] === 1 && record['2'] < 1 && s___ > 0 && record['5'] === '规模报酬递减') {
       return {
-        [columnsCount + '']: '一般',
-        [(columnsCount + 1) + '']: '续建项目暂缓立项',
+        [columnsCount + '']: s_,
+        [(columnsCount + 1) + '']: s__,
+        [(columnsCount + 2) + '']: '一般',
+        [(columnsCount + 3) + '']: '续建项目暂缓立项',
       };
     }
-    if ((record['1'] >= 0.6 && record['1'] < 1) && (record['2'] >= 0.6 && record['2'] < 1) && record['3'] > 0 && record['5'] === '规模报酬递减') {
+    if ((record['1'] >= 0.6 && record['1'] < 1) && (record['2'] >= 0.6 && record['2'] < 1) && s___ > 0 && record['5'] === '规模报酬递减') {
       return {
-        [columnsCount + '']: '较差',
-        [(columnsCount + 1) + '']: '续建项目暂缓立项',
+        [columnsCount + '']: s_,
+        [(columnsCount + 1) + '']: s__,
+        [(columnsCount + 2) + '']: '较差',
+        [(columnsCount + 3) + '']: '续建项目暂缓立项',
       };
     }
     return {
-      [columnsCount + '']: '差',
-      [(columnsCount + 1) + '']: '续建项目不予立项',
+      [columnsCount + '']: s_,
+      [(columnsCount + 1) + '']: s__,
+      [(columnsCount + 2) + '']: '差',
+      [(columnsCount + 3) + '']: '续建项目不予立项',
     };
   }
 
@@ -71,13 +84,21 @@ class DetectDialog extends Component {
     let displayColumns = columns.filter(column => ['0', '1', '2', '3', '5'].includes(column.key));
     const otherColumns = [
       {
+        name: 'S-',
+        group: 'S-',
+        key: columnsCount + ''
+      }, {
+        name: 'S+',
+        group: 'S+',
+        key: (columnsCount + 1) + ''
+      }, {
         name: '评价结果',
         group: '评价结果',
-        key: columnsCount + ''
+        key: (columnsCount + 2) + ''
       }, {
         name: '立项建议',
         group: '立项建议',
-        key: (columnsCount + 1) + ''
+        key: (columnsCount + 3) + ''
       }
     ];
     displayColumns.push(...otherColumns);

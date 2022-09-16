@@ -50,8 +50,8 @@ class oneRecordAppraisal(APIView):
         index=['项目资金投入', '项目重要程度', '所评价项目的规定时间完成程度', '项目成效评价结果']
         ).T
 
-        X = data[['项目资金投入', '项目重要程度', '所评价项目的规定时间完成程度']]
-        Y = data[['项目成效评价结果']]
+        X = data[['项目资金投入', '项目重要程度']]
+        Y = data[['所评价项目的规定时间完成程度', '项目成效评价结果']]
 
         dea = DEA(DMUs_Name=data.index, X=X, Y=Y)
         results = dea.analysis()
@@ -113,8 +113,8 @@ class fileAppraisal(APIView):
             if i == 0:
                 index_list = row[1:5]
                 project_name = row[0]
-                X = index_list[0:3]
-                Y = [index_list[3]]
+                X = index_list[0:2]
+                Y = [index_list[2], index_list[3]]
             else:
                 data[row[0]] = row[1:5]
 

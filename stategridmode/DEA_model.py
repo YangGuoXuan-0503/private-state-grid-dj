@@ -32,7 +32,7 @@ class DEA(object):
 					j] == self.Y[k][j] for j in range(self.m2))
 			MODEL.setParam('OutputFlag', 0)
 			MODEL.optimize()
-			self.Result.at[k, ('效益分析', '综合技术效益(CCR)')] = MODEL.objVal
+			self.Result.at[k, ('效益分析', '综合技术效益')] = MODEL.objVal
 			self.Result.at[k, ('规模报酬分析',
 							   '有效性')] = '非 DEA 有效' if MODEL.objVal < 1 else 'DEA 弱有效' if s_negitive.sum().getValue() + s_positive.sum().getValue() else 'DEA 强有效'
 			self.Result.at[k, ('规模报酬分析',
@@ -63,19 +63,19 @@ class DEA(object):
 			MODEL.setParam('OutputFlag', 0)
 			MODEL.optimize()
 			self.Result.at[
-				k, ('效益分析', '技术效益(BCC)')] = MODEL.objVal if MODEL.status == gurobipy.GRB.Status.OPTIMAL else 'N/A'
+				k, ('效益分析', '技术效益')] = MODEL.objVal if MODEL.status == gurobipy.GRB.Status.OPTIMAL else 'N/A'
 		return self.Result
 
 	def dea(self):
 		columns_Page = ['效益分析'] * 3 + ['规模报酬分析'] * 2 + ['差额变数分析'] * (self.m1 + self.m2) + ['投入冗余率'] * self.m1 + [
 			'产出不足率'] * self.m2
-		columns_Group = ['技术效益(BCC)', '规模效益(CCR/BCC)', '综合技术效益(CCR)', '有效性', '类型'] + (self.m1_name + self.m2_name) * 2
+		columns_Group = ['技术效益', '规模效益', '综合技术效益', '有效性', '类型'] + (self.m1_name + self.m2_name) * 2
 		self.Result = pd.DataFrame(index=self.DMUs, columns=[columns_Page, columns_Group])
 		self.__CCR()
 		self.__BCC()
-		self.Result.loc[:, ('效益分析', '规模效益(CCR/BCC)')] = self.Result.loc[:, ('效益分析', '综合技术效益(CCR)')] / self.Result.loc[:,
+		self.Result.loc[:, ('效益分析', '规模效益')] = self.Result.loc[:, ('效益分析', '综合技术效益')] / self.Result.loc[:,
 																									  ('效益分析',
-																									   '技术效益(BCC)')]
+																									   '技术效益')]
 		return self.Result
 
 	def analysis(self):
