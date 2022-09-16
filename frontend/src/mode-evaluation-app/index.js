@@ -154,7 +154,7 @@ class ModeEvaluationApp extends Component {
             />
           </FormGroup>
           <FormGroup key="project-completion-degree" className="mb-4 w-100 mode-evaluation-item d-flex">
-            <Label className="mb-1">{'所评价项目的规定时间完成程度(根据填写规定工期和实际工期的值而变化)'}</Label>
+            <Label className="mb-1">{`所评价项目的规定时间完成程度(${parseFloat(plannedDuration) - 0 < 0.00000001 ? 0 : (parseFloat(plannedDuration) - parseFloat(actualDuration)) / parseFloat(plannedDuration) * 100}%)`}</Label>
             <div className="d-flex w-100">
               <FormGroup key="planned-duration" className="mode-evaluation-item d-flex">
                 <Label className="mb-2">{'规定工期'}</Label>
