@@ -25,7 +25,8 @@
     "start": "node scripts/start.js",
     "build": "node -max_old_space_size=4096 scripts/build.js",
     "test": "node scripts/test.js",
-    "dev": "node config/server.js"
+    "dev": "node config/server.js",
+    "pro": "node config/pro-server.js"
   },
   "browserslist": {
     "production": [

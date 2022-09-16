@@ -59,22 +59,22 @@ module.exports = function(webpackEnv) {
 
   // Variable used for enabling profiling in Production
   // passed into alias object. Uses a flag if passed into the build command
-  const isEnvProductionProfile = isEnvProduction && process.argv.includes('--profile');
+  const isEnvProductionProfile =
+    isEnvProduction && process.argv.includes('--profile');
 
   // Webpack uses `publicPath` to determine where the app is being served from.
   // It requires a trailing slash, or the file assets will get an incorrect path.
   // In development, we always serve from the root. This makes config easier.
-  const publicPath = isEnvProduction ? paths.servedPath : './';
+  const publicPath = 'http://47.94.221.53:3001/assets/bundles/';
 
   // Some apps do not use client-side routing with pushState.
   // For these, "homepage" can be set to "." to enable relative asset paths.
-  // const shouldUseRelativeAssetPaths = publicPath === './';
-  const shouldUseRelativeAssetPaths = true;
+  const shouldUseRelativeAssetPaths = publicPath === './';
 
   // `publicUrl` is just like `publicPath`, but we will provide it to our app
   // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
   // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
-  const publicUrl = isEnvProduction ? publicPath.slice(0, -1) : isEnvDevelopment && '';
+  const publicUrl = publicPath.slice(0, -1);
 
   // Get environment variables to inject into our app.
   const env = getClientEnvironment(publicUrl);
@@ -192,7 +192,7 @@ module.exports = function(webpackEnv) {
         : isEnvDevelopment && 'static/js/[name].chunk.js',
       // We inferred the "public path" (such as / or /my-project) from homepage.
       // We use "/" in development.
-      // publicPath : isEnvDevelopment ? publicPath : false,
+      publicPath : isEnvDevelopment ? publicPath : false,
       // Point sourcemap entries to original disk location (format as URL on Windows)
       devtoolModuleFilenameTemplate: isEnvProduction
         ? info =>
@@ -280,7 +280,7 @@ module.exports = function(webpackEnv) {
       // https://twitter.com/wSokra/status/969633336732905474
       // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
       splitChunks: {
-        chunks: 'all',
+        chunks: 'initial',
         automaticNameDelimiter: '-',
         name: true,
         cacheGroups: {
@@ -625,8 +625,8 @@ module.exports = function(webpackEnv) {
       // to restart the development server for Webpack to discover it. This plugin
       // makes the discovery automatic so you don't have to restart.
       // See https://github.com/facebook/create-react-app/issues/186
-      isEnvDevelopment && new WatchMissingNodeModulesPlugin(paths.appNodeModules),
-
+      isEnvDevelopment &&
+        new WatchMissingNodeModulesPlugin(paths.appNodeModules),
       isEnvProduction &&
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
