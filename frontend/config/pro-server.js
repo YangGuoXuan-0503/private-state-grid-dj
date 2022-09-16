@@ -6,7 +6,7 @@ process.env.BABEL_ENV = 'development';
 
 var Webpack = require('webpack')
 var WebpackDevServer = require('webpack-dev-server')
-var configFactory = require('./webpack.config.prop')
+var configFactory = require('./webpack.config.pro')
 var config = configFactory('development');
 
 const compiler = Webpack(config);
