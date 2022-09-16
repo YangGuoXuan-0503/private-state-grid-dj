@@ -84,12 +84,12 @@ class DetectDialog extends Component {
     let displayColumns = columns.filter(column => ['0', '1', '2', '3', '5'].includes(column.key));
     const otherColumns = [
       {
-        name: 'S-',
-        group: 'S-',
+        name: '松弛变量S-',
+        group: '松弛变量S-',
         key: columnsCount + ''
       }, {
-        name: 'S+',
-        group: 'S+',
+        name: '松弛变量S+',
+        group: '松弛变量S+',
         key: (columnsCount + 1) + ''
       }, {
         name: '评价结果',

@@ -36,7 +36,7 @@ class DEA(object):
 			self.Result.at[k, ('规模报酬分析',
 							   '有效性')] = '非 DEA 有效' if MODEL.objVal < 1 else 'DEA 弱有效' if s_negitive.sum().getValue() + s_positive.sum().getValue() else 'DEA 强有效'
 			self.Result.at[k, ('规模报酬分析',
-							   '类型')] = '规模报酬固定' if lambdas.sum().getValue() == 1 else '规模报酬递增' if lambdas.sum().getValue() < 1 else '规模报酬递减'
+							   '规模报酬类型')] = '规模报酬固定' if lambdas.sum().getValue() == 1 else '规模报酬递增' if lambdas.sum().getValue() < 1 else '规模报酬递减'
 			for m in range(self.m1):
 				self.Result.at[k, ('差额变数分析', f'{self.m1_name[m]}')] = s_negitive[m].X
 				self.Result.at[k, ('投入冗余率', f'{self.m1_name[m]}')] = 'N/A' if self.X[k][m] == 0 else s_negitive[m].X / \
@@ -69,7 +69,7 @@ class DEA(object):
 	def dea(self):
 		columns_Page = ['效益分析'] * 3 + ['规模报酬分析'] * 2 + ['差额变数分析'] * (self.m1 + self.m2) + ['投入冗余率'] * self.m1 + [
 			'产出不足率'] * self.m2
-		columns_Group = ['技术效益', '规模效益', '综合技术效益', '有效性', '类型'] + (self.m1_name + self.m2_name) * 2
+		columns_Group = ['技术效益', '规模效益', '综合技术效益', '有效性', '规模报酬类型'] + (self.m1_name + self.m2_name) * 2
 		self.Result = pd.DataFrame(index=self.DMUs, columns=[columns_Page, columns_Group])
 		self.__CCR()
 		self.__BCC()
