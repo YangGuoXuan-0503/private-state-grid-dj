@@ -68,7 +68,7 @@ class DetectDialog extends Component {
     const { results } = this.props;
     const { columns, records } = results;
     const columnsCount = columns.length;
-    let displayColumns = columns.filter(column => ['0', '1', '2', '3'].includes(column.key));
+    let displayColumns = columns.filter(column => ['0', '1', '2', '3', '5'].includes(column.key));
     const otherColumns = [
       {
         name: '评价结果',
