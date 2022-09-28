@@ -36,7 +36,7 @@ class DetectDialog extends Component {
         [columnsCount + '']: s_,
         [(columnsCount + 1) + '']: s__,
         [(columnsCount + 2) + '']: '良好',
-        [(columnsCount + 3) + '']: '续建项目可以立项',
+        [(columnsCount + 3) + '']: '续建项目建议立项',
       };
     }
     if (record['1'] === 1 && record['2'] < 1 && s___ > 0 && record['5'] === '规模报酬递减') {
