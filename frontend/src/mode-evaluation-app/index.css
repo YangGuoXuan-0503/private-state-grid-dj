@@ -1,15 +1,16 @@
 .mode-evaluation-container {
-  padding: 20px;
+  padding: 0 20px 20px;
   overflow-y: scroll;
 }
 
 .mode-evaluation-container .mode-evaluation-header {
-  height: 100px;
-  padding: 0 100px;
+  height: 130px;
+  padding: 10px 80px 20px 80px;
 }
 
 .mode-evaluation-container .mode-evaluation-title {
   margin-left: 80px;
+  margin-bottom: 0px;
 }
 
 .mode-evaluation-container .mode-evaluation-item {
