@@ -7,6 +7,8 @@ import DetectDialog from './detect-dialog';
 
 import './index.css';
 
+const { mediaURL } = window.app;
+
 class ModeEvaluationApp extends Component {
   
   constructor(props) {
@@ -126,6 +128,10 @@ class ModeEvaluationApp extends Component {
     return (
       <>
         <div className="mode-evaluation-container w-100 h-100">
+          <div className="mode-evaluation-header w-100 d-flex align-items-center">
+            <img className="mode-evaluation-logo" src={`${mediaURL}images/logo.png`} alt="" width="128" height="100" />
+            <h3 className="mode-evaluation-title">{'数字化项目立项建议分析工具'}</h3>
+          </div>
           <FormGroup key="project-name" className="mb-4 w-100 mode-evaluation-item d-flex">
             <Label className="mb-2">{'项目名称'}</Label>
             <Input
